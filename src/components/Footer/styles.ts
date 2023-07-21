@@ -7,6 +7,7 @@ export const Container = styled.footer`
   background-color: ${colors.gray};
   padding: 32px 0;
   font-size: 14px;
+  margin-top: 40px;
 `
 
 export const SectionTitle = styled.h4`
@@ -21,7 +22,7 @@ export const Links = styled.ul`
 `
 
 export const Link = styled(HashLink)`
-  color: ${colors.lightgray};
+  color: ${colors.lightGray};
   text-decoration: none;
   margin-right: 8px;
 `

@@ -1,30 +1,28 @@
-import { useState, useEffect } from 'react'
-import { Image, Title, Prices } from './styles'
 import Tag from '../Tag'
 import Button from '../Button'
-import { Game } from '../../pages/Home'
-
-import { formatPrice } from '../ProductsList'
-
+import Loader from '../Loader'
 import { useGetFeaturedGameQuery } from '../../services/api'
 
+import * as S from './styles'
+import { parseToBrl } from '../../utils'
+
 const Banner = () => {
-  const { data: game, isLoading } = useGetFeaturedGameQuery()
+  const { data: game } = useGetFeaturedGameQuery()
 
   if (!game) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   return (
-    <Image style={{ backgroundImage: `url(${game.media.cover})` }}>
+    <S.Image style={{ backgroundImage: `url(${game.media.cover})` }}>
       <div className="container">
         <Tag size="big">Destaque do dia</Tag>
         <div>
-          <Title>{game?.name}</Title>
-          <Prices>
-            De <span>{formatPrice(game.prices.old)}</span> <br />
-            por apenas {formatPrice(game.prices.current)}
-          </Prices>
+          <S.Title>{game?.name}</S.Title>
+          <S.Prices>
+            De <span>{parseToBrl(game.prices.old)}</span> <br />
+            por apenas {parseToBrl(game.prices.current)}
+          </S.Prices>
         </div>
         <Button
           type="link"
@@ -34,7 +32,7 @@ const Banner = () => {
           Aproveitar
         </Button>
       </div>
-    </Image>
+    </S.Image>
   )
 }
 
